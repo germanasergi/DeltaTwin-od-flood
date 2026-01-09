@@ -1,26 +1,26 @@
 {
   "cdse_key": {
     "type": "string",
-    "value": "your_cdse_key"
+    "value": "MLTFR0SO1BCGFUV70UH5"
   },
   "cdse_secret": {
     "type": "string",
-    "value": "your_cdse_secret"
+    "value": "vhy1H1QErCukTooZgugD3YJl76jWqm3a5k1CpN51"
   },
   "earth_data_hub_pat": {
     "type": "string",
-    "value": "your_earth_data_hub_pat"
+    "value": "edh_pat_f7d93bbead8e26c86dc7c140d8a76afbe568085dec5bb1ecdcc401368a11b0e5d2b43d1a816131b1df506e52de0c20e7"
   },
   "bbox": {
     "type": "string",
-    "value": "12.5 44.9 12.8 44.5"
+    "value": "13.20694 45.859412 13.596954 45.633726"
   },
   "start_date": {
     "type": "string",
-    "value": "2025-08-15"
+    "value": "2025-11-17"
   },
   "end_date": {
     "type": "string",
-    "value": "2025-08-18"
+    "value": "2025-11-19"
   }
 }

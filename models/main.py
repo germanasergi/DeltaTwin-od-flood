@@ -33,7 +33,7 @@ def main():
 
     # Setup
     args = parser.parse_args()
-    BASE_DIR = os.environ.get("DELTA_MODEL_DIR", os.path.dirname(os.path.abspath(__file__)))
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
     config_path = os.path.join(BASE_DIR, "cfg", "config.yaml")
     config = load_config(config_path=config_path)
     DATASET_DIR = os.path.join(BASE_DIR, config['dataset_version'])

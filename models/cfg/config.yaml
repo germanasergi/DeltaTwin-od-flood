@@ -19,7 +19,7 @@ query:
   start_date: '2024-06-27'
   end_date: '2024-06-29'
   max_items: 1000
-  max_cloud_cover: 30
+  max_cloud_cover: 80
 
 # Download Configuration
 download:
