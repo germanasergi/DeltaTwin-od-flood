@@ -1,0 +1,165 @@
+{
+    "name": "od-flood",
+    "description": "The current component detects in-land flood areas. It retrieves data from Sentinel-2 and other products in the Earth Data Hub to create masks localising wet areas when present. To access the data, you need valid CDSE credentials (key and secret) as well as an Earth Hub Data key within the DestinE services. Once you have the required keys, simply provide a bounding box (bbox) for your area of interest.",
+    "license": {
+        "name": "LGPLv3",
+        "url": "https://www.gnu.org/licenses/gpl-3.0.txt",
+        "description": "",
+        "copyrights": [
+            {"years": [2025],"company": "European Space Agency"}
+        ]
+    },
+    "owner": "Germana.Sergi",
+    "inputs": {
+        "cdse_key": {
+            "type": "string",
+            "description": "CDSE: ACCESS_KEY_ID"
+        },
+        "cdse_secret": {
+            "type": "string",
+            "description": "CDSE: SECRET_ACCESS_KEY"
+        },
+        "earth_data_hub_pat":{
+            "type": "string",
+            "description": "Earth Data Hub: Personal Access Token"
+        },
+        "bbox": {
+            "type": "string",
+            "description": "Space-separated coordinates representing: min_lon,min_lat,max_lon,max_lat. (left, bottom, right, top). e.g: 3.2833 45.3833 11.2 50.1833 "
+        },
+        "start_date": {
+            "type": "string",
+            "description": "Start date for data retrieval in 'YYYY-MM-DD' format.  'today' can be used to specify the current date."
+        },
+        "end_date": {
+            "type": "string",
+            "description": "End date for data retrieval in 'YYYY-MM-DD' format. 'today' can be used to specify the current date."
+        }
+    },
+    "outputs": {
+        "out": {
+            "type": "Data",
+            "description": "A zip (.zip) containing all the raster files (.tif)"
+        }
+    },
+    "models": {
+        "flood_detector": {
+            "path": "models",
+            "type": "python",
+            "parameters": {
+                "pythonVersion": "3.11.7",
+                "pipInstallArgs": "--verbose",
+                "pipRequirements": [
+                    {
+                        "name": "Pillow",
+                        "version": "10.1.0"
+                    },
+                    {
+                        "name": "aiohttp",
+                        "version": "3.13.2"
+                    },
+                    {
+                        "name": "docstring-parser",
+                        "version": "0.16"
+                    },
+                    {
+                        "name": "dotenv",
+                        "version": "0.9.9"
+                    },
+                    {
+                        "name":"eopf",
+                        "version":"2.6.0"
+                    },
+                    {
+                        "name": "geopandas",
+                        "version": "1.1.1"
+                    },
+                    {
+                        "name": "loguru",
+                        "version": "0.7.3"
+                    },
+                    {
+                        "name": "lxml",
+                        "version": "4.9.4"
+                    },
+                    {
+                        "name": "opencv-python-headless",
+                        "version": "4.11.0.86"
+                    },
+                    {
+                        "name": "pystac-client",
+                        "version": "0.8.6"
+                    },
+                    {
+                        "name": "matplotlib",
+                        "version": "3.10.3"
+                    },
+                    {
+                        "name": "pandas",
+                        "version": "2.3.3"
+                    },
+                    {
+                        "name": "rasterio",
+                        "version": "1.3.10"
+                    },
+                    {
+                        "name": "segmentation-models-pytorch",
+                        "version": "0.5.0"
+                    },
+                    {
+                        "name": "timm",
+                        "version": "1.0.15"
+                    },
+                    {
+                        "name": "torch",
+                        "version": "2.9.0"
+                    },
+                    {
+                        "name": "xarray",
+                        "version": "2024.11.0"
+                    },
+                    {
+                        "name":"zarr", 
+                        "version":"2.18.4"
+                    }
+                ],
+                "aptRequirements": [
+                    {"name": "gdal-bin"},
+                    {"name": "libgdal-dev"},
+                    {"name": "libnetcdf-c++4-dev"}
+                ],
+                "hardwareRequirements": {
+                    "cpu": "4000m",
+                    "ram": "16Gi"
+                },
+                "command": "python main.py --cdse_key $(inputs.cdse_key) --cdse_secret $(inputs.cdse_secret) --earth_data_hub_pat $(inputs.earth_data_hub_pat) --bbox $(inputs.bbox) --start_date $(inputs.start_date) --end_date $(inputs.end_date)"
+             },
+            "inputs": {
+                "cdse_key":{
+                    "type":"string"
+                },
+                "cdse_secret":{
+                    "type": "string"
+                },
+                "earth_data_hub_pat":{
+                    "type": "string"
+                },
+                "bbox": {
+                    "type": "string"
+                },
+                "start_date": {
+                    "type": "string"
+                },
+                "end_date": {
+                    "type": "string"
+                }
+            },
+            "outputs": {
+                "out_segmentation": {
+                    "type": "Data",
+                    "glob": "flood_masks.zip"
+                }
+            }
+        }
+    }
+}

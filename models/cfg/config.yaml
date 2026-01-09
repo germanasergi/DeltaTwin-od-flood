@@ -1,0 +1,33 @@
+# S3 Endpoint Configuration
+endpoint_url: 'https://eodata.dataspace.copernicus.eu'
+endpoint_stac: 'https://stac.dataspace.copernicus.eu/v1/'
+bucket_name: 'eodata'
+
+# Dataset Configuration
+dataset_version: 'data'
+base_dir: '/tmp/DeltaTwin_run'
+bands: ['b01','b02', 'b03', 'b04', 'b05', 'b06', 'b07','b08','b8a', 'b11', 'b12']
+
+# Query Configuration
+query:
+  bbox:
+    - 12.5
+    - 44.9
+    - 12.8
+    - 44.5
+
+  start_date: '2024-06-27'
+  end_date: '2024-06-29'
+  max_items: 1000
+  max_cloud_cover: 30
+
+# Download Configuration
+download:
+  sample_size: null  # Set to null for all samples
+  resize: false
+  resize_target: null
+  l1c_resolution: 10
+  l2a_resolution: 10
+  max_attempts: 10
+  retry_delay: 20
+  patch_size: 256

@@ -1,0 +1,62 @@
+nodes:
+  - id: cdse_key
+    ref: inputs.cdse_key
+  - id: cdse_secret
+    ref: inputs.cdse_secret
+  - id: earth_data_hub_pat
+    ref: inputs.earth_data_hub_pat
+  - id: bbox
+    ref: inputs.bbox
+  - id: start_date
+    ref: inputs.start_date
+  - id: end_date
+    ref: inputs.end_date
+  - id: flood_detector
+    ref: models.flood_detector
+  - id: output_segmentation
+    ref: outputs.out
+    
+edges:
+  # Connect credentials and parameters to the detector
+  - from:
+      id: cdse_key
+    to:
+      id: flood_detector
+      port: cdse_key
+
+  - from:
+      id: cdse_secret
+    to:
+      id: flood_detector
+      port: cdse_secret
+
+  - from:
+      id: earth_data_hub_pat
+    to:
+      id: flood_detector
+      port: earth_data_hub_pat
+
+  - from:
+      id: bbox
+    to:
+      id: flood_detector
+      port: bbox
+
+  - from:
+      id: start_date
+    to:
+      id: flood_detector
+      port: start_date
+
+  - from:
+      id: end_date
+    to:
+      id: flood_detector
+      port: end_date
+
+  # Connect detector outputs to workflow outputs
+  - from:
+      id: flood_detector
+      port: out_segmentation
+    to:
+      id: output_segmentation
