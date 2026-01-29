@@ -123,15 +123,18 @@ def main():
         for i, patch in enumerate(patches):
 
             b3_idx = bands.index("b03") # green
+            b8_idx = bands.index("b08") # nir
             b11_idx = bands.index("b11") # swir
 
             green = patch[:, :, b3_idx].astype(np.float32)
+            nir = patch[:, :, b8_idx].astype(np.float32)
             swir = patch[:, :, b11_idx].astype(np.float32)
 
             eps = 1e-6
             mndwi = (green - swir) / (green + swir + eps)
+            ndwi = (green - nir) / (green + nir + eps)
 
-            flood_mask = (mndwi > 0.1).astype(np.uint8)
+            flood_mask = (ndwi > 0.1).astype(np.uint8)
             flood_masks.append(flood_mask)
             
 
@@ -154,15 +157,15 @@ def main():
             out_dir=BASE_DIR
         )
 
-        #crop_tiff_to_bbox(tif_path, args.bbox, tif_path)
+        crop_tiff_to_bbox(tif_path, args.bbox, tif_path)
         tif_paths.append(tif_path)
 
-    # Create ZIP of all TIFs
-    zip_path = os.path.join(BASE_DIR, "flood_masks.zip")
-    with zipfile.ZipFile(zip_path, 'w') as zipf:
-        for tif in tif_paths:
-            zipf.write(tif, os.path.basename(tif))
-            os.remove(tif)
+    # # Create ZIP of all TIFs
+    # zip_path = os.path.join(BASE_DIR, "flood_masks.zip")
+    # with zipfile.ZipFile(zip_path, 'w') as zipf:
+    #     for tif in tif_paths:
+    #         zipf.write(tif, os.path.basename(tif))
+    #         os.remove(tif)
 
         # visualize_final_panel(
         #     zarr_path=zarr_path,

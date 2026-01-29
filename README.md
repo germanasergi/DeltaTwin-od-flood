@@ -12,8 +12,7 @@ For a detailed explanation on the DeltaTwin, see at: [DeltaTwin Doc](https://del
    1. [Set up CDSE Credentials and Earth Data Hub Token](#set-up-credentials)
    2. [Test the Delta Twin Locally](#test-the-delta-twin-locally)
    3. [Publish the Delta Twin](#publish-the-delta-twin)
-3. [Output Example](#output-example)
-4. [Repository Structure](#repository-structure)
+3. [Repository Structure](#repository-structure)
 
 ## 1 - Run the Processor Locally
 
@@ -105,17 +104,8 @@ deltatwin run start_local -i inputs_file.json --debug
 deltatwin component publish -t whatever-tag 0.0.1 
 ```
 
-## 3 - Output Example
 
-Below is an example of the Delta Twin output. The L2A product download, preprocessed, ingested by the model to generate the probability map and the binary mask of mucilage segmentation.
-![WorkflowIllustration](assets/Picture2.png)
-
-The worflow should output a raster representing mucilage location.
-
-![OutputVisualization](assets/Picture3.png)
-
-
-## 4 - Repository Structure
+## 3 - Repository Structure
 
 The repository is structured as follows:
 
